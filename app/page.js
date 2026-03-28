@@ -72,8 +72,7 @@ export default function Home() {
         </h1>
         {/* ✏️ ИЗМЕНИТЕ: Замените описание на своё */}
         <p className="text-xl text-gray-500 max-w-xl mb-10 leading-relaxed">
-          Руководитель travel-функции с 2014 года. Наставник и играющий тренер —
-          лично веду самые сложные запросы, организую VIP-поездки и системно
+          Руководитель travel-функции с 2014 года. Организую VIP-поездки и системно
           улучшаю процессы через работу над ошибками.
         </p>
         <div className="flex flex-wrap gap-4">
@@ -118,8 +117,7 @@ export default function Home() {
             <p>
               В работе совмещаю управленческую и экспертную роль: выступаю
               наставником для команды, системно провожу работу над ошибками,
-              разбираю сложные случаи и лично подключаюсь к наиболее
-              ответственным запросам.
+              разбираю сложные случаи и не допускаю повторения ошибок.
             </p>
             <p>
               Открыт к новым проектам и сотрудничеству — пишите, обсудим!
@@ -231,7 +229,7 @@ export default function Home() {
                 </label>
                 <input
                   type="email"
-                  placeholder="your@email.com"
+                  placeholder="ks.orlov@gmail.com"
                   className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gray-400 transition-colors bg-white"
                 />
               </div>
