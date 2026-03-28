@@ -204,10 +204,10 @@ export default function Home() {
               <div className="flex items-center gap-3">
                 <span className="text-gray-300">Telegram</span>
                 <a
-                  href="https://t.me/your_telegram"
+                  href="https://t.me/Konstantin_Orlov_404"
                   className="text-gray-900 hover:underline"
                 >
-                  @your_telegram
+                  @Konstantin_Orlov_404
                 </a>
               </div>
             </div>
@@ -229,7 +229,7 @@ export default function Home() {
                 </label>
                 <input
                   type="email"
-                  placeholder="ks.orlov@gmail.com"
+                  placeholder="Ваш e-mail"
                   className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gray-400 transition-colors bg-white"
                 />
               </div>
