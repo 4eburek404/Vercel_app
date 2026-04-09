@@ -18,10 +18,22 @@ export default function ContactForm() {
   function handleChange(event) {
     const { name, value } = event.target;
 
+    if (status !== "idle") {
+      setStatus("idle");
+      setStatusMessage("");
+    }
+
     setFormData((current) => ({
       ...current,
       [name]: value,
     }));
+  }
+
+  function handleInvalid() {
+    if (status !== "idle") {
+      setStatus("idle");
+      setStatusMessage("");
+    }
   }
 
   async function handleSubmit(event) {
@@ -54,9 +66,7 @@ export default function ContactForm() {
 
       setFormData(INITIAL_FORM);
       setStatus("success");
-      setStatusMessage(
-        "Сообщение отправлено. Если форма ещё не была активирована в FormSubmit, проверьте ваш email и подтвердите первый запрос."
-      );
+      setStatusMessage("Сообщение отправлено. Я свяжусь с вами в ближайшее время.");
     } catch {
       setStatus("error");
       setStatusMessage(
@@ -66,7 +76,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form className="space-y-4" onSubmit={handleSubmit}>
+    <form className="space-y-4" onInvalid={handleInvalid} onSubmit={handleSubmit}>
       <div>
         <label className="block text-sm text-gray-500 mb-1" htmlFor="name">
           Имя
@@ -100,13 +110,16 @@ export default function ContactForm() {
           value={formData.email}
         />
       </div>
-      <div className="hidden" aria-hidden="true">
-        <label htmlFor="company">Компания</label>
+      <div
+        aria-hidden="true"
+        className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden"
+      >
         <input
           autoComplete="off"
           id="company"
           name="company"
           onChange={handleChange}
+          placeholder="Компания"
           tabIndex={-1}
           type="text"
           value={formData.company}
