@@ -3,9 +3,49 @@ import { navLinks } from "./nav-links";
 
 export default function Home() {
   const currentYear = new Date().getFullYear();
+  const personStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Константин Орлов",
+    url: "https://konstantin-orlov.vercel.app",
+    jobTitle: "Руководитель travel-функции",
+    description:
+      "Руководитель travel-функции. Организует VIP-поездки, сопровождает сложные маршруты, развивает команду и улучшает travel-процессы.",
+    email: "mailto:konstantin.orlov1985@icloud.com",
+    sameAs: ["https://t.me/Konstantin_Orlov_404"],
+    knowsAbout: [
+      "Корпоративные командировки",
+      "VIP-поездки",
+      "Travel management",
+      "Travel operations",
+      "Оптимизация travel-процессов",
+      "GDS Amadeus",
+    ],
+  };
+  const websiteStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Константин Орлов",
+    url: "https://konstantin-orlov.vercel.app",
+    inLanguage: "ru-RU",
+    description:
+      "Сайт Константина Орлова о travel management, VIP-поездках и оптимизации корпоративных travel-процессов.",
+  };
 
   return (
     <main className="min-h-screen bg-white text-gray-900">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(personStructuredData),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(websiteStructuredData),
+        }}
+      />
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-gray-100">
         <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -37,10 +77,9 @@ export default function Home() {
           <br />
           <span className="text-gray-400">Константин</span>
         </h1>
-        {/* ✏️ ИЗМЕНИТЕ: Замените описание на своё */}
         <p className="text-xl text-gray-500 max-w-xl mb-10 leading-relaxed">
-          Руководитель travel-функции с 2014 года. Организую VIP-поездки и системно
-          улучшаю процессы через работу над ошибками.
+          Руководитель travel-функции с 2014 года. Организую VIP-поездки,
+          сопровождаю сложные деловые маршруты и системно улучшаю travel-процессы.
         </p>
         <div className="flex flex-wrap gap-4">
           <a
@@ -167,7 +206,6 @@ export default function Home() {
                   konstantin.orlov1985@icloud.com
                 </a>
               </div>
-              {/* ✏️ ИЗМЕНИТЕ: Укажите свой Telegram */}
               <div className="flex items-center gap-3">
                 <span className="text-gray-300">Telegram</span>
                 <a
