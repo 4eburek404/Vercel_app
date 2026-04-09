@@ -1,10 +1,8 @@
-"use client";
-
-import { useState } from "react";
+import MobileNav from "./mobile-nav";
+import { navLinks } from "./nav-links";
 
 export default function Home() {
   const currentYear = new Date().getFullYear();
-  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <main className="min-h-screen bg-white text-gray-900">
@@ -15,49 +13,18 @@ export default function Home() {
             Konstantin Orlov
           </span>
           <div className="hidden md:flex items-center gap-8 text-sm text-gray-500">
-            <a href="#about" className="hover:text-gray-900 transition-colors">
-              Обо мне
-            </a>
-            <a
-              href="#services"
-              className="hover:text-gray-900 transition-colors"
-            >
-              Экспертиза
-            </a>
-            <a
-              href="#contact"
-              className="hover:text-gray-900 transition-colors"
-            >
-              Контакты
-            </a>
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="hover:text-gray-900 transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
-          <button
-            className="md:hidden text-gray-500 hover:text-gray-900"
-            aria-label="Toggle menu"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
+          <MobileNav links={navLinks} />
         </div>
-        {menuOpen && (
-          <div className="md:hidden border-t border-gray-100 bg-white px-6 py-4 space-y-3 text-sm text-gray-500">
-            <a href="#about" className="block hover:text-gray-900" onClick={() => setMenuOpen(false)}>Обо мне</a>
-            <a href="#services" className="block hover:text-gray-900" onClick={() => setMenuOpen(false)}>Экспертиза</a>
-            <a href="#contact" className="block hover:text-gray-900" onClick={() => setMenuOpen(false)}>Контакты</a>
-          </div>
-        )}
       </nav>
 
       {/* Hero Section */}
