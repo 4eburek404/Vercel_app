@@ -6,25 +6,14 @@ const INITIAL_FORM = {
   name: "",
   email: "",
   message: "",
+  company: "",
 };
-
-function buildMailtoUrl({ name, email, message }) {
-  const subject = encodeURIComponent(`Запрос с сайта от ${name}`);
-  const body = encodeURIComponent(
-    [
-      `Имя: ${name}`,
-      `Email: ${email}`,
-      "",
-      "Сообщение:",
-      message,
-    ].join("\n")
-  );
-
-  return `mailto:konstantin.orlov1985@icloud.com?subject=${subject}&body=${body}`;
-}
+const FORM_ENDPOINT = "https://formsubmit.co/ajax/konstantin.orlov1985@icloud.com";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState(INITIAL_FORM);
+  const [status, setStatus] = useState("idle");
+  const [statusMessage, setStatusMessage] = useState("");
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -35,10 +24,45 @@ export default function ContactForm() {
     }));
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
-    window.location.href = buildMailtoUrl(formData);
+    setStatus("loading");
+    setStatusMessage("");
+
+    const payload = new FormData();
+    payload.append("name", formData.name);
+    payload.append("email", formData.email);
+    payload.append("_replyto", formData.email);
+    payload.append("message", formData.message);
+    payload.append("_subject", `Запрос с сайта от ${formData.name}`);
+    payload.append("_template", "table");
+    payload.append("_honey", formData.company);
+
+    try {
+      const response = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        body: payload,
+      });
+
+      if (!response.ok) {
+        throw new Error("request_failed");
+      }
+
+      setFormData(INITIAL_FORM);
+      setStatus("success");
+      setStatusMessage(
+        "Сообщение отправлено. Если форма ещё не была активирована в FormSubmit, проверьте ваш email и подтвердите первый запрос."
+      );
+    } catch {
+      setStatus("error");
+      setStatusMessage(
+        "Не удалось отправить сообщение. Попробуйте ещё раз или напишите напрямую в Telegram."
+      );
+    }
   }
 
   return (
@@ -76,6 +100,18 @@ export default function ContactForm() {
           value={formData.email}
         />
       </div>
+      <div className="hidden" aria-hidden="true">
+        <label htmlFor="company">Компания</label>
+        <input
+          autoComplete="off"
+          id="company"
+          name="company"
+          onChange={handleChange}
+          tabIndex={-1}
+          type="text"
+          value={formData.company}
+        />
+      </div>
       <div>
         <label className="block text-sm text-gray-500 mb-1" htmlFor="message">
           Сообщение
@@ -93,14 +129,23 @@ export default function ContactForm() {
         ></textarea>
       </div>
       <button
-        className="w-full bg-gray-900 text-white py-3 rounded-xl text-sm font-medium hover:bg-gray-700 transition-colors"
+        className="w-full bg-gray-900 text-white py-3 rounded-xl text-sm font-medium hover:bg-gray-700 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        disabled={status === "loading"}
         type="submit"
       >
-        Отправить на email
+        {status === "loading" ? "Отправка..." : "Отправить сообщение"}
       </button>
+      {statusMessage ? (
+        <p
+          className={`text-sm leading-relaxed ${
+            status === "success" ? "text-green-700" : "text-red-600"
+          }`}
+        >
+          {statusMessage}
+        </p>
+      ) : null}
       <p className="text-xs text-gray-400 leading-relaxed">
-        После отправки откроется ваш почтовый клиент с готовым письмом. Если
-        удобнее, можно сразу написать в{" "}
+        Сообщение отправляется прямо с сайта. Если удобнее, можно сразу написать в{" "}
         <a
           className="text-gray-700 hover:text-gray-900 underline underline-offset-2"
           href="https://t.me/Konstantin_Orlov_404"
