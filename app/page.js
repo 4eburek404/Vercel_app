@@ -1,3 +1,4 @@
+import ContactForm from "./contact-form";
 import MobileNav from "./mobile-nav";
 import { navLinks } from "./nav-links";
 
@@ -72,14 +73,14 @@ export default function Home() {
         <p className="text-sm text-gray-400 tracking-widest uppercase mb-4">
           Руководитель travel-функции
         </p>
-        <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-tight mb-6">
-          Привет, я
-          <br />
-          <span className="text-gray-400">Константин</span>
+        <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-tight mb-6 max-w-4xl">
+          Организую сложные деловые поездки для руководителей без сбоев и
+          лишнего шума
         </h1>
         <p className="text-xl text-gray-500 max-w-xl mb-10 leading-relaxed">
-          Руководитель travel-функции с 2014 года. Организую VIP-поездки,
-          сопровождаю сложные деловые маршруты и системно улучшаю travel-процессы.
+          Константин Орлов. С 2014 года управляю travel-функцией: VIP-поездки,
+          нестандартные маршруты, сопровождение командировок под ключ и
+          системное улучшение travel-процессов.
         </p>
         <div className="flex flex-wrap gap-4">
           <a
@@ -219,42 +220,7 @@ export default function Home() {
           </div>
           <div className="bg-gray-50 rounded-2xl p-8">
             <h3 className="font-semibold mb-6">Написать сообщение</h3>
-            <form className="space-y-4">
-              <div>
-                <label className="block text-sm text-gray-500 mb-1">Имя</label>
-                <input
-                  type="text"
-                  placeholder="Ваше имя"
-                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gray-400 transition-colors bg-white"
-                />
-              </div>
-              <div>
-                <label className="block text-sm text-gray-500 mb-1">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  placeholder="Ваш e-mail"
-                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gray-400 transition-colors bg-white"
-                />
-              </div>
-              <div>
-                <label className="block text-sm text-gray-500 mb-1">
-                  Сообщение
-                </label>
-                <textarea
-                  rows={4}
-                  placeholder="Расскажите о вашем проекте..."
-                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gray-400 transition-colors bg-white resize-none"
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-gray-900 text-white py-3 rounded-xl text-sm font-medium hover:bg-gray-700 transition-colors"
-              >
-                Отправить
-              </button>
-            </form>
+            <ContactForm />
           </div>
         </div>
       </section>
