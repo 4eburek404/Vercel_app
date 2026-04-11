@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { track } from "@vercel/analytics";
 
 const INITIAL_FORM = {
   name: "",
@@ -34,6 +35,11 @@ export default function ContactForm() {
       setStatus("idle");
       setStatusMessage("");
     }
+
+    track("form_validation_error", {
+      form: "contact_form",
+      path: window.location.pathname,
+    });
   }
 
   async function handleSubmit(event) {
@@ -67,23 +73,39 @@ export default function ContactForm() {
       setFormData(INITIAL_FORM);
       setStatus("success");
       setStatusMessage("Сообщение отправлено. Я свяжусь с вами в ближайшее время.");
+      track("form_submit_success", {
+        form: "contact_form",
+        path: window.location.pathname,
+      });
     } catch {
       setStatus("error");
       setStatusMessage(
         "Не удалось отправить сообщение. Попробуйте ещё раз или напишите напрямую в Telegram."
       );
+      track("form_submit_error", {
+        form: "contact_form",
+        path: window.location.pathname,
+      });
     }
   }
 
   return (
-    <form className="space-y-4" onInvalid={handleInvalid} onSubmit={handleSubmit}>
+    <form
+      className="space-y-4"
+      data-analytics-form="contact_form"
+      onInvalid={handleInvalid}
+      onSubmit={handleSubmit}
+    >
       <div>
-        <label className="block text-sm text-gray-500 mb-1" htmlFor="name">
+        <label
+          className="mb-2 block text-[0.72rem] font-medium uppercase tracking-[0.22em] text-zinc-500"
+          htmlFor="name"
+        >
           Имя
         </label>
         <input
           autoComplete="name"
-          className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gray-400 transition-colors bg-white"
+          className="w-full rounded-[1.15rem] border border-black/10 bg-[rgba(248,243,236,0.78)] px-4 py-3.5 text-sm text-zinc-900 transition-colors placeholder:text-zinc-400 focus:border-[var(--accent)] focus:outline-none"
           id="name"
           maxLength={80}
           name="name"
@@ -95,12 +117,15 @@ export default function ContactForm() {
         />
       </div>
       <div>
-        <label className="block text-sm text-gray-500 mb-1" htmlFor="email">
+        <label
+          className="mb-2 block text-[0.72rem] font-medium uppercase tracking-[0.22em] text-zinc-500"
+          htmlFor="email"
+        >
           Email
         </label>
         <input
           autoComplete="email"
-          className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gray-400 transition-colors bg-white"
+          className="w-full rounded-[1.15rem] border border-black/10 bg-[rgba(248,243,236,0.78)] px-4 py-3.5 text-sm text-zinc-900 transition-colors placeholder:text-zinc-400 focus:border-[var(--accent)] focus:outline-none"
           id="email"
           name="email"
           onChange={handleChange}
@@ -126,11 +151,14 @@ export default function ContactForm() {
         />
       </div>
       <div>
-        <label className="block text-sm text-gray-500 mb-1" htmlFor="message">
+        <label
+          className="mb-2 block text-[0.72rem] font-medium uppercase tracking-[0.22em] text-zinc-500"
+          htmlFor="message"
+        >
           Сообщение
         </label>
         <textarea
-          className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-gray-400 transition-colors bg-white resize-none"
+          className="w-full resize-none rounded-[1.15rem] border border-black/10 bg-[rgba(248,243,236,0.78)] px-4 py-3.5 text-sm text-zinc-900 transition-colors placeholder:text-zinc-400 focus:border-[var(--accent)] focus:outline-none"
           id="message"
           maxLength={1200}
           name="message"
@@ -142,7 +170,8 @@ export default function ContactForm() {
         ></textarea>
       </div>
       <button
-        className="w-full bg-gray-900 text-white py-3 rounded-xl text-sm font-medium hover:bg-gray-700 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        className="w-full rounded-full bg-zinc-950 py-3.5 text-sm font-medium text-white transition-colors hover:bg-[var(--accent-deep)] disabled:cursor-not-allowed disabled:opacity-60"
+        data-analytics-label="contact_form:submit"
         disabled={status === "loading"}
         type="submit"
       >
@@ -157,10 +186,11 @@ export default function ContactForm() {
           {statusMessage}
         </p>
       ) : null}
-      <p className="text-xs text-gray-400 leading-relaxed">
+      <p className="text-xs leading-relaxed text-zinc-500">
         Сообщение отправляется прямо с сайта. Если удобнее, можно сразу написать в{" "}
         <a
-          className="text-gray-700 hover:text-gray-900 underline underline-offset-2"
+          className="text-zinc-700 underline underline-offset-2 hover:text-zinc-950"
+          data-analytics-label="contact_form:telegram_link"
           href="https://t.me/Konstantin_Orlov_404"
           target="_blank"
           rel="noreferrer"

@@ -1,27 +1,38 @@
 import "./globals.css";
-import { Manrope } from "next/font/google";
+import { Lora, Manrope } from "next/font/google";
+import SiteAnalytics from "./site-analytics";
 
 const manrope = Manrope({
   subsets: ["latin", "cyrillic"],
+  display: "swap",
+  variable: "--font-sans",
+});
+
+const lora = Lora({
+  subsets: ["latin", "cyrillic"],
+  display: "swap",
+  variable: "--font-serif",
 });
 
 export const metadata = {
   metadataBase: new URL("https://konstantin-orlov.vercel.app"),
   title: {
-    default: "Константин Орлов",
+    default: "Константин Орлов — корпоративные командировки и travel-процессы",
     template: "%s | Константин Орлов",
   },
   description:
-    "Константин Орлов — руководитель travel-функции. Организация VIP-поездок, сопровождение сложных маршрутов, развитие команды и оптимизация корпоративных travel-процессов.",
+    "Константин Орлов — руководитель функции организации деловых поездок. Корпоративные командировки, travel policy, контроль затрат, VIP-поездки и оптимизация travel-процессов.",
   keywords: [
     "Константин Орлов",
-    "travel management",
     "корпоративные командировки",
-    "VIP-поездки",
     "деловые поездки",
-    "travel-функция",
-    "организация командировок",
+    "организация деловых поездок",
+    "руководитель travel-функции",
+    "travel policy",
+    "контроль затрат на командировки",
+    "VIP-поездки",
     "оптимизация travel-процессов",
+    "автоматизация travel-процессов",
     "Amadeus",
   ],
   authors: [{ name: "Константин Орлов" }],
@@ -35,15 +46,17 @@ export const metadata = {
     locale: "ru_RU",
     url: "https://konstantin-orlov.vercel.app",
     siteName: "Константин Орлов",
-    title: "Константин Орлов",
+    title:
+      "Константин Орлов — эксперт по корпоративным командировкам и travel-процессам",
     description:
-      "Руководитель travel-функции: VIP-поездки, сложные маршруты, развитие команды и улучшение travel-процессов.",
+      "Руководитель функции организации деловых поездок: travel policy, контроль затрат, VIP-поездки, сложные маршруты и операционная устойчивость travel-сервиса.",
   },
   twitter: {
     card: "summary",
-    title: "Константин Орлов",
+    title:
+      "Константин Орлов — эксперт по корпоративным командировкам и travel-процессам",
     description:
-      "Руководитель travel-функции: VIP-поездки, сложные маршруты и оптимизация travel-процессов.",
+      "Корпоративные командировки, travel policy, контроль затрат, VIP-поездки и оптимизация travel-процессов.",
   },
   robots: {
     index: true,
@@ -62,7 +75,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="ru">
-      <body className={manrope.className}>{children}</body>
+      <body className={`${manrope.variable} ${lora.variable}`}>
+        {children}
+        <SiteAnalytics />
+      </body>
     </html>
   );
 }
