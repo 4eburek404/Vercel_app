@@ -14,15 +14,15 @@ const expertiseAreas = [
 const heroStats = [
   {
     value: "12+",
-    label: "лет в корпоративном travel и организации деловых поездок",
+    label: "лет опыта в организации корпоративных поездок",
   },
   {
     value: "RU / INTL",
-    label: "Россия, международные маршруты и нестандартная логистика",
+    label: "маршруты по России и за рубежом, включая нестандартную логистику",
   },
   {
-    value: "VIP + срочно",
-    label: "кейсы, где важны приватность, скорость и личная ответственность",
+    value: "VIP",
+    label: "поездки первых лиц, где важны скорость, точность и тишина",
   },
 ];
 
@@ -265,12 +265,12 @@ export default function Home() {
             Корпоративный travel
           </p>
           <h1 className="font-editorial mt-5 max-w-4xl text-5xl leading-[0.96] tracking-[-0.05em] text-[var(--ink)] sm:text-6xl lg:text-7xl xl:text-[6.35rem]">
-            Деловые поездки, которые не ломают ритм бизнеса
+            Командировки работают — бизнес не ждёт
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-[color:var(--muted)] md:text-xl">
-            Я веду travel-функцию как рабочую систему: держу под контролем
-            заявки, маршруты, исключения, VIP-запросы и документы, когда для
-            бизнеса важны точность, темп и спокойное исполнение.
+            Собираю travel-функцию так, чтобы заявки, маршруты, VIP-запросы
+            и документы шли без сбоев. Когда бизнесу нужны точность и темп —
+            поездки не должны быть источником хаоса.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             {expertiseAreas.map((area) => (
@@ -357,28 +357,24 @@ export default function Home() {
               Подход
             </p>
             <h2 className="font-editorial mt-4 text-4xl leading-[1.02] tracking-[-0.045em] text-[var(--ink)] md:text-5xl lg:text-[3.6rem]">
-              Я не продаю travel как красивую витрину. Я собираю его так, чтобы
-              он выдерживал реальную нагрузку.
+              Не витрина сервиса, а рабочая система, которая выдерживает
+              реальную нагрузку.
             </h2>
           </div>
           <div className="space-y-5 text-lg leading-8 text-[color:var(--muted)]">
             <p>
-              Для бизнеса командировка редко бывает только про билеты и отель.
-              Это всегда связка сроков, согласований, исключений, статусов,
-              бюджета и ожиданий от сервиса. Именно на этой связке travel чаще
-              всего начинает буксовать.
+              Командировка — это не билеты и отель. Это сроки, согласования,
+              бюджет, исключения и ожидания от сервиса в одном флаконе. Когда
+              связок много, travel начинает буксовать.
             </p>
             <p>
-              Я работаю на стыке сервиса, операционного контроля и управления
-              процессами: собираю понятную логику действий, помогаю команде
-              держать стандарт, а руководителям видеть, где функция реально
-              помогает бизнесу, а где создаёт скрытые потери.
+              Я работаю на стыке сервиса и операционного контроля: собираю
+              понятную логику, помогаю команде держать стандарт, а руководителям —
+              видеть, где функция помогает бизнесу, а где создаёт скрытые потери.
             </p>
             <p>
-              Моя зона силы — корпоративные командировки, VIP- и
-              executive-поездки, сложные маршруты, корректная работа с travel
-              policy, поддержка при сбоях и системное улучшение качества
-              travel-сервиса.
+              Мой фокус — корпоративные командировки, VIP-поездки, сложные
+              маршруты, travel policy и системное улучшение качества сервиса.
             </p>
           </div>
         </div>
@@ -400,7 +396,7 @@ export default function Home() {
               return (
                 <article
                   key={task.title}
-                  className={`rounded-[1.8rem] border p-7 shadow-[0_20px_50px_-38px_rgba(31,26,21,0.42)] transition-transform hover:-translate-y-1 ${
+                  className={`card-lift rounded-[1.8rem] border p-7 shadow-[0_20px_50px_-38px_rgba(31,26,21,0.42)] ${
                     highlighted
                       ? "border-black/10 bg-[rgba(168,82,50,0.08)]"
                       : "border-black/10 bg-[rgba(255,251,245,0.76)]"
@@ -479,8 +475,7 @@ export default function Home() {
             FAQ
           </p>
           <h2 className="font-editorial mt-4 max-w-4xl text-4xl leading-[1.02] tracking-[-0.045em] text-[var(--ink)] md:text-5xl lg:text-[3.25rem]">
-            Вопросы, которые обычно задают до того, как travel начинает мешать
-            бизнесу.
+            Частые вопросы о travel-функции и корпоративных поездках.
           </h2>
           <div className="mt-12 space-y-4">
             {faqItems.map((item) => (
@@ -512,8 +507,7 @@ export default function Home() {
               Контакты
             </p>
             <h2 className="font-editorial mt-4 text-4xl leading-[1.02] tracking-[-0.045em] text-[var(--ink)] md:text-5xl lg:text-[3.2rem]">
-              Если нужна сильная travel-функция, давайте соберём её без лишнего
-              шума.
+              Давайте обсудим, как сделать ваши поездки управляемыми.
             </h2>
             <p className="mt-6 max-w-xl text-lg leading-8 text-[color:var(--muted)]">
               Можно написать, если нужен взгляд на текущий процесс, поддержка в
@@ -569,7 +563,7 @@ export default function Home() {
       <footer className="border-t border-black/10 px-6 py-8" data-analytics-section="footer">
         <div className="mx-auto flex max-w-6xl flex-col gap-3 text-sm text-zinc-600 md:flex-row md:items-center md:justify-between">
           <span>&copy; {currentYear} Konstantin Orlov</span>
-          <span>Корпоративные командировки, сложные маршруты и устойчивые travel-процессы</span>
+          <span>Travel, который работает как система</span>
         </div>
       </footer>
     </main>
