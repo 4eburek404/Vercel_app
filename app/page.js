@@ -316,12 +316,14 @@ export default function Home() {
         </div>
 
         <aside className="fade-up-delay relative rounded-[2.2rem] border border-black/10 bg-[rgba(255,251,245,0.8)] p-8 shadow-[0_32px_80px_-48px_rgba(31,26,21,0.5)]">
-          <span className="absolute right-6 top-6 rounded-full border border-black/10 bg-white/75 px-3 py-1 text-xs uppercase tracking-[0.2em] text-[var(--accent)]">
-            С 2014
-          </span>
-          <p className="text-xs font-medium uppercase tracking-[0.3em] text-zinc-500">
-            Когда я особенно полезен
-          </p>
+          <div className="flex items-center justify-between gap-4">
+            <p className="text-xs font-medium uppercase tracking-[0.3em] text-zinc-500">
+              Когда я особенно полезен
+            </p>
+            <span className="shrink-0 rounded-full border border-black/10 bg-white/75 px-3 py-1 text-xs uppercase tracking-[0.2em] text-[var(--accent)]">
+              С 2014
+            </span>
+          </div>
           <div className="mt-7 space-y-6">
             {supportScenarios.map((item) => (
               <div
