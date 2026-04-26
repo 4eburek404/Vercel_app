@@ -1,6 +1,6 @@
 import ContactForm from "./contact-form";
-import MobileNav from "./mobile-nav";
 import { navLinks } from "./nav-links";
+import SiteHeader from "./site-header";
 
 const expertiseAreas = [
   "Корпоративные командировки",
@@ -223,38 +223,7 @@ export default function Home() {
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[34rem] bg-[linear-gradient(180deg,rgba(255,250,244,0.9),rgba(255,250,244,0))]" />
       <div className="pointer-events-none absolute inset-y-0 left-1/2 -z-10 hidden w-px bg-black/5 xl:block" />
 
-      <nav
-        className="fixed left-0 right-0 top-0 z-50 border-b border-black/10 bg-[rgba(250,245,238,0.78)] backdrop-blur-xl"
-        data-analytics-section="header_nav"
-      >
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <span className="font-editorial text-2xl tracking-tight text-[var(--ink)]">
-            Konstantin Orlov
-          </span>
-          <div className="hidden items-center gap-7 text-sm text-zinc-600 md:flex">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="transition-colors hover:text-zinc-950"
-                data-analytics-label={`desktop_nav:${link.label}`}
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-          <div className="hidden md:block">
-            <a
-              href="#contact"
-              className="inline-flex rounded-full border border-black/10 bg-[rgba(255,251,245,0.7)] px-5 py-2.5 text-sm font-medium text-zinc-800 transition-colors hover:border-black/20 hover:bg-white hover:text-zinc-950"
-              data-analytics-label="desktop_nav:contact_cta"
-            >
-              Написать
-            </a>
-          </div>
-          <MobileNav links={navLinks} />
-        </div>
-      </nav>
+      <SiteHeader activeRole="travel" navLinks={navLinks} />
 
       <section
         className="mx-auto grid max-w-6xl gap-10 px-6 pb-20 pt-32 lg:grid-cols-[1.1fr_0.9fr] lg:items-start lg:pb-24"
