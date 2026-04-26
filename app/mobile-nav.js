@@ -3,7 +3,12 @@
 import { useState, useEffect, useRef } from "react";
 import { track } from "@vercel/analytics";
 
-export default function MobileNav({ links }) {
+export default function MobileNav({
+  ctaHref = "#contact",
+  ctaLabel = "Обсудить задачу",
+  links,
+  roleLinks = [],
+}) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
@@ -47,7 +52,7 @@ export default function MobileNav({ links }) {
   }
 
   return (
-    <div className="md:hidden" data-analytics-section="mobile_nav">
+    <div className="lg:hidden" data-analytics-section="mobile_nav">
       <button
         ref={buttonRef}
         type="button"
@@ -90,40 +95,62 @@ export default function MobileNav({ links }) {
         />
       )}
 
-      <div
-        ref={menuRef}
-        id="mobile-navigation"
-        className="absolute left-4 right-4 top-[calc(100%+0.75rem)] z-50 rounded-[1.75rem] border border-black/10 bg-[rgba(255,251,245,0.97)] px-5 py-5 text-sm text-zinc-700 shadow-[0_24px_60px_-40px_rgba(31,26,21,0.55)] backdrop-blur-xl transition-all duration-300"
-        style={{
-          opacity: menuOpen ? 1 : 0,
-          transform: menuOpen ? "translateY(0)" : "translateY(-12px)",
-          pointerEvents: menuOpen ? "auto" : "none",
-        }}
-      >
-        <div className="space-y-1">
-          {links.map((link) => (
+      {menuOpen ? (
+        <div
+          ref={menuRef}
+          id="mobile-navigation"
+          className="absolute left-4 right-4 top-[calc(100%+0.75rem)] z-50 rounded-[1.75rem] border border-black/10 bg-[rgba(255,251,245,0.97)] px-5 py-5 text-sm text-zinc-700 shadow-[0_24px_60px_-40px_rgba(31,26,21,0.55)] backdrop-blur-xl"
+          style={{ animation: "rise 220ms cubic-bezier(0.22, 1, 0.36, 1) both" }}
+        >
+          {roleLinks.length > 0 ? (
+            <div
+              aria-label="Выбор профиля"
+              className="mb-4 grid grid-cols-2 rounded-full border border-black/10 bg-[rgba(248,243,236,0.8)] p-1 text-center text-xs font-medium text-zinc-600"
+            >
+              {roleLinks.map((role) => (
+                <a
+                  key={role.id}
+                  aria-current={role.active ? "page" : undefined}
+                  className={`rounded-full px-3 py-2 transition-colors ${
+                    role.active
+                      ? "bg-zinc-950 text-white"
+                      : "hover:bg-white hover:text-zinc-950"
+                  }`}
+                  data-analytics-label={`mobile_role_switch:${role.id}`}
+                  href={role.href}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {role.label}
+                </a>
+              ))}
+            </div>
+          ) : null}
+
+          <div className="space-y-1">
+            {links.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="block rounded-2xl border border-transparent px-4 py-3 transition-colors hover:border-black/10 hover:bg-white hover:text-zinc-950"
+                data-analytics-label={`mobile_nav:${link.label}`}
+                onClick={() => setMenuOpen(false)}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+          <div className="mt-4 border-t border-black/10 pt-4">
             <a
-              key={link.href}
-              href={link.href}
-              className="block rounded-2xl border border-transparent px-4 py-3 transition-colors hover:border-black/10 hover:bg-white hover:text-zinc-950"
-              data-analytics-label={`mobile_nav:${link.label}`}
+              href={ctaHref}
+              className="inline-flex w-full justify-center rounded-full bg-zinc-950 px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-[var(--accent-deep)]"
+              data-analytics-label="mobile_nav:contact_cta"
               onClick={() => setMenuOpen(false)}
             >
-              {link.label}
+              {ctaLabel}
             </a>
-          ))}
+          </div>
         </div>
-        <div className="mt-4 border-t border-black/10 pt-4">
-          <a
-            href="#contact"
-            className="inline-flex w-full justify-center rounded-full bg-zinc-950 px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-[var(--accent-deep)]"
-            data-analytics-label="mobile_nav:contact_cta"
-            onClick={() => setMenuOpen(false)}
-          >
-            Обсудить задачу
-          </a>
-        </div>
-      </div>
+      ) : null}
     </div>
   );
 }
