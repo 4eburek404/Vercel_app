@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { track } from "@vercel/analytics";
+import { reachYandexGoal } from "./yandex-metrika";
 
 const INITIAL_FORM = {
   name: "",
@@ -77,6 +78,10 @@ export default function ContactForm() {
         form: "contact_form",
         path: window.location.pathname,
       });
+      reachYandexGoal("contact_form_submit_success", {
+        form: "contact_form",
+        path: window.location.pathname,
+      });
     } catch {
       setStatus("error");
       setStatusMessage(
@@ -105,7 +110,7 @@ export default function ContactForm() {
         </label>
         <input
           autoComplete="name"
-          className="w-full rounded-[1.15rem] border border-black/10 bg-[rgba(248,243,236,0.78)] px-4 py-3.5 text-sm text-zinc-900 transition-colors placeholder:text-zinc-400 focus:border-[var(--accent)] focus:outline-none"
+          className="ym-disable-keys w-full rounded-[1.15rem] border border-black/10 bg-[rgba(248,243,236,0.78)] px-4 py-3.5 text-sm text-zinc-900 transition-colors placeholder:text-zinc-400 focus:border-[var(--accent)] focus:outline-none"
           id="name"
           maxLength={80}
           name="name"
@@ -125,7 +130,7 @@ export default function ContactForm() {
         </label>
         <input
           autoComplete="email"
-          className="w-full rounded-[1.15rem] border border-black/10 bg-[rgba(248,243,236,0.78)] px-4 py-3.5 text-sm text-zinc-900 transition-colors placeholder:text-zinc-400 focus:border-[var(--accent)] focus:outline-none"
+          className="ym-disable-keys w-full rounded-[1.15rem] border border-black/10 bg-[rgba(248,243,236,0.78)] px-4 py-3.5 text-sm text-zinc-900 transition-colors placeholder:text-zinc-400 focus:border-[var(--accent)] focus:outline-none"
           id="email"
           name="email"
           onChange={handleChange}
@@ -141,6 +146,7 @@ export default function ContactForm() {
       >
         <input
           autoComplete="off"
+          className="ym-disable-keys"
           id="company"
           name="company"
           onChange={handleChange}
@@ -158,7 +164,7 @@ export default function ContactForm() {
           Сообщение
         </label>
         <textarea
-          className="w-full resize-none rounded-[1.15rem] border border-black/10 bg-[rgba(248,243,236,0.78)] px-4 py-3.5 text-sm text-zinc-900 transition-colors placeholder:text-zinc-400 focus:border-[var(--accent)] focus:outline-none"
+          className="ym-disable-keys w-full resize-none rounded-[1.15rem] border border-black/10 bg-[rgba(248,243,236,0.78)] px-4 py-3.5 text-sm text-zinc-900 transition-colors placeholder:text-zinc-400 focus:border-[var(--accent)] focus:outline-none"
           id="message"
           maxLength={1200}
           name="message"
